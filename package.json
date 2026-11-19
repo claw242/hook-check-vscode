@@ -1,0 +1,81 @@
+{
+  "name": "hook-check",
+  "displayName": "Hook Check",
+  "description": "Check that the commands in your hook settings exist, test a hook on demand, insert guard snippets. Compatible with the Claude Code hooks format; not affiliated with Anthropic. Created with AI assistance by Loupe & Lettres.",
+  "version": "0.1.0",
+  "publisher": "loupeetlettres",
+  "license": "MIT",
+  "private": false,
+  "engines": {
+    "vscode": "^1.85.0",
+    "node": ">=20"
+  },
+  "categories": [
+    "Linters",
+    "Snippets",
+    "Other"
+  ],
+  "keywords": [
+    "hooks",
+    "settings.json",
+    "guardrails",
+    "lint",
+    "pretooluse"
+  ],
+  "main": "./extension.js",
+  "activationEvents": [
+    "onLanguage:json",
+    "onLanguage:jsonc"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "In Restricted Mode Hook Check still checks that hook commands exist, but it never runs a hook."
+    }
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "hookCheck.testHookAtCursor",
+        "title": "Hook Check: Test the hook command at the cursor"
+      },
+      {
+        "command": "hookCheck.testHook",
+        "title": "Hook Check: Test this hook"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "hookCheck.testHook",
+          "when": "false"
+        }
+      ]
+    },
+    "snippets": [
+      {
+        "language": "json",
+        "path": "./snippets/hooks.json"
+      },
+      {
+        "language": "jsonc",
+        "path": "./snippets/hooks.json"
+      }
+    ]
+  },
+  "scripts": {
+    "package": "vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^3.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/claw242/hook-check-vscode.git"
+  },
+  "homepage": "https://github.com/claw242/hook-check-vscode",
+  "bugs": {
+    "url": "https://github.com/claw242/hook-check-vscode/issues"
+  }
+}
