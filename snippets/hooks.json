@@ -1,0 +1,87 @@
+{
+  "Hook Check: Block rm -rf": {
+    "prefix": [
+      "hookcheck-block-rm-rf"
+    ],
+    "description": "PreToolUse guard: exit code 2 blocks the call. Created with AI assistance (créé avec l'aide de l'IA) by Loupe & Lettres.",
+    "body": [
+      "{",
+      "\t\"matcher\": \"${1:Bash}\",",
+      "\t\"hooks\": [",
+      "\t\t{",
+      "\t\t\t\"type\": \"command\",",
+      "\t\t\t\"command\": \"if grep -Eq 'rm +-[a-zA-Z]*([rR][fF]|[fF][rR])'; then echo 'Hook Check snippet: blocked rm -rf' >&2; exit 2; fi\"",
+      "\t\t}",
+      "\t]",
+      "}"
+    ]
+  },
+  "Hook Check: Block git push --force": {
+    "prefix": [
+      "hookcheck-block-force-push"
+    ],
+    "description": "PreToolUse guard: exit code 2 blocks the call. Created with AI assistance (créé avec l'aide de l'IA) by Loupe & Lettres.",
+    "body": [
+      "{",
+      "\t\"matcher\": \"${1:Bash}\",",
+      "\t\"hooks\": [",
+      "\t\t{",
+      "\t\t\t\"type\": \"command\",",
+      "\t\t\t\"command\": \"if grep -Eq 'git +push.*( --force| -f )'; then echo 'Hook Check snippet: blocked git push --force' >&2; exit 2; fi\"",
+      "\t\t}",
+      "\t]",
+      "}"
+    ]
+  },
+  "Hook Check: Block tool calls that mention .env": {
+    "prefix": [
+      "hookcheck-block-env-files"
+    ],
+    "description": "PreToolUse guard: exit code 2 blocks the call. Created with AI assistance (créé avec l'aide de l'IA) by Loupe & Lettres.",
+    "body": [
+      "{",
+      "\t\"matcher\": \"${1:Read|Edit|Write|Bash}\",",
+      "\t\"hooks\": [",
+      "\t\t{",
+      "\t\t\t\"type\": \"command\",",
+      "\t\t\t\"command\": \"if grep -Fq '.env'; then echo 'Hook Check snippet: blocked access to .env files' >&2; exit 2; fi\"",
+      "\t\t}",
+      "\t]",
+      "}"
+    ]
+  },
+  "Hook Check: Block curl or wget piped into a shell": {
+    "prefix": [
+      "hookcheck-block-curl-pipe-sh"
+    ],
+    "description": "PreToolUse guard: exit code 2 blocks the call. Created with AI assistance (créé avec l'aide de l'IA) by Loupe & Lettres.",
+    "body": [
+      "{",
+      "\t\"matcher\": \"${1:Bash}\",",
+      "\t\"hooks\": [",
+      "\t\t{",
+      "\t\t\t\"type\": \"command\",",
+      "\t\t\t\"command\": \"if grep -Eq '(curl|wget)[^|]*[|] *(sudo +)?(ba|z)?sh'; then echo 'Hook Check snippet: blocked curl | sh' >&2; exit 2; fi\"",
+      "\t\t}",
+      "\t]",
+      "}"
+    ]
+  },
+  "Hook Check: Block sudo": {
+    "prefix": [
+      "hookcheck-block-sudo"
+    ],
+    "description": "PreToolUse guard: exit code 2 blocks the call. Created with AI assistance (créé avec l'aide de l'IA) by Loupe & Lettres.",
+    "body": [
+      "{",
+      "\t\"matcher\": \"${1:Bash}\",",
+      "\t\"hooks\": [",
+      "\t\t{",
+      "\t\t\t\"type\": \"command\",",
+      "\t\t\t\"command\": \"if grep -Eq '(^|[^a-zA-Z])sudo '; then echo 'Hook Check snippet: blocked sudo' >&2; exit 2; fi\"",
+      "\t\t}",
+      "\t]",
+      "}"
+    ]
+  }
+}
